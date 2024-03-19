@@ -25,12 +25,32 @@ svm_clf.predict([[5.5, 1.7]])
 
 # Reference code for linear SVM classification
 
-#--- Loading the Iris dataset from scikit-learn ---
+#--- Splitting data into 70% training and 30% test data ---
 
-import numpy as np
-from sklearn import datasets
-iris = datasets.load_iris()
-X = iris["data"][:, (2, 3)] # petal length, petal width
-y = (iris["target"] == 2).astype(np.float64) # Iris virginica
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.3, random_state=1)
 
-print(np.array(X))
+#--- Standardizing the features ---
+
+from sklearn.preprocessing import StandardScaler
+sc = StandardScaler()
+sc.fit(X_train)
+X_train = sc.transform(X_train)
+X_test = sc.transform(X_test)
+
+#--- Build a linear SVM classifier ---
+
+from sklearn.svm import LinearSVC
+svm_clf = LinearSVC(C=1, loss="hinge")
+svm_clf.fit(X_train,y_train)
+
+
+#--- Test the SVM model ---
+y_hat=svm_clf.predict(X_test)
+
+print("This is train X value: ")
+print(np.array(X_train))
+print("This is y hat value")
+print(np.array(y_hat))
+
