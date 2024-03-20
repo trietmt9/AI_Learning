@@ -9,13 +9,13 @@ y = (iris["target"] == 2).astype(np.float64) # Iris virginica
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 from sklearn.svm import LinearSVC
- 
+
 
 #Standardizing the features & Build a linear SVM classifier 
 
 svm_clf = Pipeline([
-     ("scaler", StandardScaler()),
-     ("linear_svc", LinearSVC(C=1, loss="hinge"))
+    ("scaler", StandardScaler()),
+    ("linear_svc", LinearSVC(C=1, loss="hinge"))
 
   ])
 
@@ -64,7 +64,7 @@ plt.ylabel('petal width [standardized]')
 plt.legend(loc='upper left')
 plt.tight_layout()
 plt.show()
-print(work_path)
+# print(work_path)
 print("This is train X value: ")
 print(np.array(X_train))
 print("This is y hat value")
